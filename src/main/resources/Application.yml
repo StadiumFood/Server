@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: "dev"
+
+---
+
+spring:
+  profiles: dev
+server:
+  host: localhost
+  port: 9011
