@@ -19,6 +19,8 @@ public class Sell {
     @Column(name = "sellDate")
     private Timestamp sellDate;
 
+    public Sell(){}
+
     public Sell(Integer userId, Boolean isCompleted, Timestamp sellDate) {
         this.userId = userId;
         this.isCompleted = isCompleted;

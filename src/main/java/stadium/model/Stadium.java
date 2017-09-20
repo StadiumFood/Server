@@ -12,6 +12,8 @@ public class Stadium {
     @Column(name = "name")
     private String name;
 
+    public Stadium(){}
+
     public Stadium(String name) {
         this.name = name;
     }

@@ -1,7 +1,14 @@
 package stadium.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.sf.json.JSONObject;
+import stadium.exception.JsonParseException;
+
 import javax.persistence.*;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class Client {
@@ -24,6 +31,30 @@ public class Client {
 
     @Column(name = "regDate")
     private Timestamp regDate;
+
+    public Map<String, Object> getMap(){
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("id", id);
+        result.put("name", name);
+        result.put("surName", surName);
+        result.put("oldName", oldName);
+        result.put("email", email);
+        result.put("regDate", regDate);
+
+        return result;
+    }
+
+    public static Client fromJson(JSONObject obj) throws JsonParseException {
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(obj.toString(), Client.class);
+        }catch (IOException ex){
+            throw  new JsonParseException("Error on parse Client from Json", ex);
+        }
+    }
+
+    public Client(){}
 
     public Client(String name, String surName, String oldName, String email, Timestamp regDate) {
         this.name = name;

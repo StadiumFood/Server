@@ -21,6 +21,8 @@ public class Storage {
     @Column(name = "phone")
     private String phone;
 
+    public Storage(){}
+
     public Storage(Integer stadiumId, String sector, String name, String phone) {
         this.stadiumId = stadiumId;
         this.sector = sector;

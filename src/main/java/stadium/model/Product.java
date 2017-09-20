@@ -21,6 +21,8 @@ public class Product {
     @Column(name = "name")
     private String name;
 
+    public Product(){}
+
     public Product(Integer typeId, String description, Double price, String name) {
         this.typeId = typeId;
         this.description = description;

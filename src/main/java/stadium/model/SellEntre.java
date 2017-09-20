@@ -24,6 +24,8 @@ public class SellEntre {
     @Column(name = "quantity")
     private Integer quantity;
 
+    public SellEntre(){}
+
     public SellEntre(Integer sellId, Integer productId, Integer storageId, Double productPrice, Integer quantity) {
         this.sellId = sellId;
         this.productId = productId;

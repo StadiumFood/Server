@@ -18,6 +18,8 @@ public class ProductAvaliability {
     @Column(name = "quantity")
     private Integer quantity;
 
+    public ProductAvaliability(){}
+
     public ProductAvaliability(Integer productId, Integer storageId, Integer quantity) {
         this.productId = productId;
         this.storageId = storageId;

@@ -13,6 +13,8 @@ public class Type {
     @Column(name = "name")
     private String name;
 
+    public Type(){}
+
     public Type(String name) {
         this.name = name;
     }
