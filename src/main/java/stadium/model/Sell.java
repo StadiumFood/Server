@@ -2,6 +2,7 @@ package stadium.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Map;
 
 @Entity
 public class Sell {
@@ -10,8 +11,8 @@ public class Sell {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "userId")
-    private Integer userId;
+    @Column(name = "clientId")
+    private Long clientId;
 
     @Column(name = "isCompleted")
     private Boolean isCompleted;
@@ -19,13 +20,11 @@ public class Sell {
     @Column(name = "sellDate")
     private Timestamp sellDate;
 
-    public Sell(){}
+//    public Map<String, Object> getMap(){
+//        return null;
+//    }
 
-    public Sell(Integer userId, Boolean isCompleted, Timestamp sellDate) {
-        this.userId = userId;
-        this.isCompleted = isCompleted;
-        this.sellDate = sellDate;
-    }
+    public Sell(){}
 
     public int getId() {
         return id;
@@ -35,12 +34,12 @@ public class Sell {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public Boolean getCompleted() {

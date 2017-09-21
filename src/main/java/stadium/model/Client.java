@@ -5,17 +5,19 @@ import net.sf.json.JSONObject;
 import stadium.exception.JsonParseException;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
-public class Client {
+public class Client implements Functions {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -27,10 +29,15 @@ public class Client {
     private String oldName;
 
     @Column(name = "email")
+    @NotNull
     private String email;
 
     @Column(name = "regDate")
     private Timestamp regDate;
+
+    @OneToMany(mappedBy="clientId")
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+    private List<Sell> sellList;
 
     public Map<String, Object> getMap(){
         Map<String, Object> result = new HashMap<>();
@@ -41,6 +48,7 @@ public class Client {
         result.put("oldName", oldName);
         result.put("email", email);
         result.put("regDate", regDate);
+        result.put("buys",sellList);
 
         return result;
     }
@@ -56,19 +64,11 @@ public class Client {
 
     public Client(){}
 
-    public Client(String name, String surName, String oldName, String email, Timestamp regDate) {
-        this.name = name;
-        this.surName = surName;
-        this.oldName = oldName;
-        this.email = email;
-        this.regDate = regDate;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -110,5 +110,13 @@ public class Client {
 
     public void setRegDate(Timestamp regDate) {
         this.regDate = regDate;
+    }
+
+    public List getSellList() {
+        return sellList;
+    }
+
+    public void setSellList(List sellList) {
+        this.sellList = sellList;
     }
 }
