@@ -10,9 +10,10 @@ spring:
     hibernate:
       ddl-auto: create
   datasource:
-    url: jdbc:mysql://localhost:3306/heroku_f55c067bb8163f0
-    username: b0ae0c5f9fb986
-    password: b6c0c0d7
+  url: mysql://b0ae0c5f9fb986:b6c0c0d7@us-cdbr-iron-east-05.cleardb.net/heroku_f55c067bb8163f0
+#    url: jdbc:mysql://localhost:3306/heroku_f55c067bb8163f0
+#    username: b0ae0c5f9fb986
+#    password: b6c0c0d7
 server:
   host: localhost
   port: 9999
