@@ -11,8 +11,8 @@ spring:
       ddl-auto: create
   datasource:
     url: jdbc:mysql://localhost:3306/heroku_f55c067bb8163f0
-    username: testUser
-    password: testPassword
+    username: b0ae0c5f9fb986
+    password: b6c0c0d7
 server:
   host: localhost
   port: 9999
