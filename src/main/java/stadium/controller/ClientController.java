@@ -25,5 +25,4 @@ public class ClientController {
     public ResponseEntity saveSingleClient(@RequestBody Client client) throws ConstraintViolationException {
         return new ResponseEntity(controllerService.saveSingleClient(client), HttpStatus.OK);
     }
-
 }
