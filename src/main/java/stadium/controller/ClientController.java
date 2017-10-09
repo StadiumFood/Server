@@ -25,4 +25,12 @@ public class ClientController {
     public ResponseEntity saveSingleClient(@RequestBody Client client) throws ConstraintViolationException {
         return new ResponseEntity(controllerService.saveSingleClient(client), HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @DeleteMapping("/client/{id}")
+    public ResponseEntity deleteSingleClient(@PathVariable("id") Long id) throws Exception {
+        return new ResponseEntity(controllerService.deleteSingleClient(id), HttpStatus.OK);
+    }
+
+
 }

@@ -20,15 +20,22 @@ public class GenericServiceImpl<T extends Functions> implements GenericService<T
         this.type=c;
     }
 
-    @Override
     public T getById(Long id) throws Exception {
         return entityManager.find(type, id);
     }
 
-    @Override
-    public Long saveSingleObject(T object) throws ConstraintViolationException {
+    public Long save(T object) throws ConstraintViolationException {
         entityManager.persist(object);
         entityManager.flush();
         return object.getId();
+    }
+
+    public void delete(Long id) throws Exception{
+        T obj = entityManager.find(type, id);
+        entityManager.remove(obj);
+    }
+
+    public void patch(T object) throws Exception {
+        //TODO
     }
 }

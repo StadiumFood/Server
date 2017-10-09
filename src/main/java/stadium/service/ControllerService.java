@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stadium.dto.ResponseDTO;
 import stadium.model.Client;
+import stadium.service.beans.ClientService;
 
 import javax.validation.ConstraintViolationException;
 
@@ -12,7 +13,7 @@ import javax.validation.ConstraintViolationException;
 public class ControllerService {
 
     @Autowired
-    GenericServiceImpl<Client> clientGenericService;
+    ClientService clientGenericService;
 
     public ResponseDTO getClientById(Long id) throws Exception {
         ResponseDTO dto = ResponseDTO.allIsOk();
@@ -25,8 +26,14 @@ public class ControllerService {
 
     public ResponseDTO saveSingleClient(Client client) throws ConstraintViolationException {
         ResponseDTO dto = ResponseDTO.allIsOk();
-        Long id = clientGenericService.saveSingleObject(client);
+        Long id = clientGenericService.save(client);
         dto.setMessage(id.toString());
+        return dto;
+    }
+
+    public ResponseDTO deleteSingleClient(Long id) throws Exception {
+        ResponseDTO dto = ResponseDTO.allIsOk();
+        clientGenericService.delete(id);
         return dto;
     }
 
