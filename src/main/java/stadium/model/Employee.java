@@ -17,13 +17,11 @@ public class Employee implements Functions{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "positionId")
-    private Position positionId;
+    @Column(name = "positionId")
+    private Integer positionId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "passportId")
-    private Passport passportId;
+    @Column(name = "passportId")
+    private Integer passportId;
 
     @Column(name = "name")
     private String name;
@@ -84,19 +82,19 @@ public class Employee implements Functions{
         this.id = id;
     }
 
-    public Position getPositionId() {
+    public Integer getPositionId() {
         return positionId;
     }
 
-    public void setPositionId(Position positionId) {
+    public void setPositionId(Integer positionId) {
         this.positionId = positionId;
     }
 
-    public Passport getPassportId() {
+    public Integer getPassportId() {
         return passportId;
     }
 
-    public void setPassportId(Passport passportId) {
+    public void setPassportId(Integer passportId) {
         this.passportId = passportId;
     }
 

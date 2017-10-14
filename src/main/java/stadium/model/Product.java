@@ -51,13 +51,6 @@ public class Product implements Functions{
 
     public Product(){}
 
-    public Product(Integer typeId, String description, Double price, String name) {
-        this.typeId = typeId;
-        this.description = description;
-        this.price = price;
-        this.name = name;
-    }
-
     public Long getId() {
         return id;
     }

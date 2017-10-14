@@ -9,12 +9,4 @@ public class ClientService extends GenericServiceImpl<Client> {
     public ClientService(){
         this.setType(Client.class);
     }
-
-
-//    @Bean
-//    public GenericServiceImpl<Client> clientGenericService(){
-//        GenericServiceImpl<Client> genericService = new GenericServiceImpl<>();
-//        genericService.setType(Client.class);
-//        return genericService;
-//    }
 }

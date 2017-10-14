@@ -17,13 +17,11 @@ public class EmployeeWorks implements Functions{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "storageId")
-    private Storage storageId;
+    @Column(name = "storageId")
+    private Integer storageId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeeId")
-    private Employee employeeId;
+    @Column(name = "employeeId")
+    private Integer employeeId;
 
     @Column(name = "loginTime")
     private Timestamp loginTime;
@@ -60,19 +58,19 @@ public class EmployeeWorks implements Functions{
         this.id = id;
     }
 
-    public Storage getStorageId() {
+    public Integer getStorageId() {
         return storageId;
     }
 
-    public void setStorageId(Storage storageId) {
+    public void setStorageId(Integer storageId) {
         this.storageId = storageId;
     }
 
-    public Employee getEmployeeId() {
+    public Integer getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Employee employeeId) {
+    public void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
     }
 

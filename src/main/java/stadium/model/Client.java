@@ -44,10 +44,6 @@ public class Client implements Functions {
     @Column(name = "isValidated")
     private Boolean isValidated;
 
-    @OneToMany(mappedBy="clientId")
-    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
-    private List<Sell> sellList;
-
     public Map<String, Object> getMap(){
         Map<String, Object> result = new HashMap<>();
 
@@ -59,7 +55,6 @@ public class Client implements Functions {
         result.put("regDate", regDate);
         result.put("remDate", remDate);
         result.put("isValidated", isValidated);
-        result.put("buys",sellList);
 
         return result;
     }
@@ -145,14 +140,6 @@ public class Client implements Functions {
 
     public void setIsValidated(Boolean validated) {
         isValidated = validated;
-    }
-
-    public void setSellList(List<Sell> sellList) {
-        this.sellList = sellList;
-    }
-
-    public List getSellList() {
-        return sellList;
     }
 
 }

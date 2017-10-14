@@ -4,31 +4,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import stadium.model.Client;
+import stadium.model.Type;
 import stadium.service.ControllerService;
 
 import javax.validation.ConstraintViolationException;
 
 @RestController
-public class ClientController {
+public class TypeController {
     @Autowired
     private ControllerService controllerService;
 
     @CrossOrigin
-    @GetMapping("/client/{id}")
+    @GetMapping("/type/{id}")
     public ResponseEntity getById(@PathVariable("id") Long id) throws Exception {
-        return new ResponseEntity(controllerService.getClientById(id), HttpStatus.OK);
+        return new ResponseEntity(controllerService.getTypeById(id), HttpStatus.OK);
     }
 
     @CrossOrigin
-    @PostMapping("/client")
-    public ResponseEntity save(@RequestBody Client client) throws ConstraintViolationException {
-        return new ResponseEntity(controllerService.saveSingleClient(client), HttpStatus.OK);
+    @PostMapping("/type")
+    public ResponseEntity save(@RequestBody Type type) throws ConstraintViolationException {
+        return new ResponseEntity(controllerService.saveSingleType(type), HttpStatus.OK);
     }
 
     @CrossOrigin
-    @DeleteMapping("/client/{id}")
+    @DeleteMapping("/type/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id) throws Exception {
-        return new ResponseEntity(controllerService.deleteSingleClient(id), HttpStatus.OK);
+        return new ResponseEntity(controllerService.deleteSingleType(id), HttpStatus.OK);
     }
 }

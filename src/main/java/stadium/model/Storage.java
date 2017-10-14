@@ -16,9 +16,8 @@ public class Storage implements Functions{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "coordinatesId")
-    private Coordinates coordinatesId;
+    @Column(name = "coordinatesId")
+    private Integer coordinatesId;
 
     @Column(name = "sector")
     private String sector;
@@ -52,11 +51,11 @@ public class Storage implements Functions{
 
     public Storage(){}
 
-    public Coordinates getCoordinatesId() {
+    public Integer getCoordinatesId() {
         return coordinatesId;
     }
 
-    public void setCoordinatesId(Coordinates coordinatesId) {
+    public void setCoordinatesId(Integer coordinatesId) {
         this.coordinatesId = coordinatesId;
     }
 
