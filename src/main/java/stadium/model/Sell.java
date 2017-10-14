@@ -1,15 +1,24 @@
 package stadium.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.sf.json.JSONObject;
+import stadium.exception.JsonParseException;
+
 import javax.persistence.*;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-public class Sell {
+public class Sell implements Functions {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
+
+    @Column(name = "employeeId")
+    private Long employeeId;
 
     @Column(name = "clientId")
     private Long clientId;
@@ -20,18 +29,43 @@ public class Sell {
     @Column(name = "sellDate")
     private Timestamp sellDate;
 
-//    public Map<String, Object> getMap(){
-//        return null;
-//    }
+    public Map<String, Object> getMap(){
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("id", id);
+        result.put("employeeId", employeeId);
+        result.put("clientId", clientId);
+        result.put("isCompleted", isCompleted);
+        result.put("sellDate", sellDate);
+
+        return result;
+    }
+
+    public static Client fromJson(JSONObject obj) throws JsonParseException {
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(obj.toString(), Client.class);
+        }catch (IOException ex){
+            throw  new JsonParseException("Error on parse Sell from Json", ex);
+        }
+    }
 
     public Sell(){}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public Long getClientId() {
@@ -42,11 +76,11 @@ public class Sell {
         this.clientId = clientId;
     }
 
-    public Boolean getCompleted() {
+    public Boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setIsCompleted(Boolean completed) {
         isCompleted = completed;
     }
 

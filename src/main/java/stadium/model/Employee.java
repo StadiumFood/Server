@@ -5,19 +5,25 @@ import net.sf.json.JSONObject;
 import stadium.exception.JsonParseException;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Entity
-public class Client implements Functions {
+public class Employee implements Functions{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "positionId")
+    private Position positionId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "passportId")
+    private Passport passportId;
 
     @Column(name = "name")
     private String name;
@@ -29,7 +35,6 @@ public class Client implements Functions {
     private String oldName;
 
     @Column(name = "email")
-    @NotNull
     private String email;
 
     @Column(name = "regDate")
@@ -41,25 +46,19 @@ public class Client implements Functions {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "isValidated")
-    private Boolean isValidated;
-
-    @OneToMany(mappedBy="clientId")
-    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
-    private List<Sell> sellList;
-
     public Map<String, Object> getMap(){
         Map<String, Object> result = new HashMap<>();
 
         result.put("id", id);
+        result.put("positionId", positionId);
+        result.put("passportId", passportId);
         result.put("name", name);
         result.put("surName", surName);
         result.put("oldName", oldName);
         result.put("email", email);
         result.put("regDate", regDate);
         result.put("remDate", remDate);
-        result.put("isValidated", isValidated);
-        result.put("buys",sellList);
+        result.put("password", password);
 
         return result;
     }
@@ -69,18 +68,36 @@ public class Client implements Functions {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(obj.toString(), Client.class);
         }catch (IOException ex){
-            throw  new JsonParseException("Error on parse Client from Json", ex);
+            throw  new JsonParseException("Error on parse Employee from Json", ex);
         }
     }
 
-    public Client(){}
+    public Employee() {
+    }
 
+    @Override
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Position getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(Position positionId) {
+        this.positionId = positionId;
+    }
+
+    public Passport getPassportId() {
+        return passportId;
+    }
+
+    public void setPassportId(Passport passportId) {
+        this.passportId = passportId;
     }
 
     public String getName() {
@@ -138,21 +155,4 @@ public class Client implements Functions {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Boolean getIsValidated() {
-        return isValidated;
-    }
-
-    public void setIsValidated(Boolean validated) {
-        isValidated = validated;
-    }
-
-    public void setSellList(List<Sell> sellList) {
-        this.sellList = sellList;
-    }
-
-    public List getSellList() {
-        return sellList;
-    }
-
 }

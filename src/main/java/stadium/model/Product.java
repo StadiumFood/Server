@@ -1,13 +1,20 @@
 package stadium.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.sf.json.JSONObject;
+import stadium.exception.JsonParseException;
+
 import javax.persistence.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
-public class Product {
+public class Product implements Functions{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "typeId")
     private Integer typeId;
@@ -21,6 +28,27 @@ public class Product {
     @Column(name = "name")
     private String name;
 
+    public Map<String, Object> getMap(){
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("id", id);
+        result.put("typeId", typeId);
+        result.put("description", description);
+        result.put("price", price);
+        result.put("name", name);
+
+        return result;
+    }
+
+    public static Client fromJson(JSONObject obj) throws JsonParseException {
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(obj.toString(), Client.class);
+        }catch (IOException ex){
+            throw  new JsonParseException("Error on parse Product from Json", ex);
+        }
+    }
+
     public Product(){}
 
     public Product(Integer typeId, String description, Double price, String name) {
@@ -30,11 +58,11 @@ public class Product {
         this.name = name;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
