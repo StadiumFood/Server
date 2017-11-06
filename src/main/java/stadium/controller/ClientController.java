@@ -31,4 +31,11 @@ public class ClientController {
     public ResponseEntity delete(@PathVariable("id") Long id) throws Exception {
         return new ResponseEntity(controllerService.deleteSingleClient(id), HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @GetMapping("/client/{id}/buys")
+    public ResponseEntity getSellsByClientId(@PathVariable("id") Long id) throws Exception {
+        return new ResponseEntity(controllerService.getSellsByClientId(id), HttpStatus.OK);
+    }
+
 }

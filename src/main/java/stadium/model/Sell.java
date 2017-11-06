@@ -29,28 +29,34 @@ public class Sell implements Functions {
     @Column(name = "sellDate")
     private Timestamp sellDate;
 
-    public Map<String, Object> getMap(){
-        Map<String, Object> result = new HashMap<>();
+    public Map<String, Object> getMap() {
+        Map<String, Object> map = new HashMap<>();
 
-        result.put("id", id);
-        result.put("employeeId", employeeId);
-        result.put("clientId", clientId);
-        result.put("isCompleted", isCompleted);
-        result.put("sellDate", sellDate);
+        map.put("id", id);
+        map.put("employeeId", employeeId);
+        map.put("clientId", clientId);
+        map.put("isCompleted", isCompleted);
+        map.put("sellDate", sellDate);
 
-        return result;
+        return map;
     }
 
+    public void setMap(Map<String, Object> map) {
+
+    }
+
+
     public static Client fromJson(JSONObject obj) throws JsonParseException {
-        try{
+        try {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(obj.toString(), Client.class);
-        }catch (IOException ex){
-            throw  new JsonParseException("Error on parse Sell from Json", ex);
+        } catch (IOException ex) {
+            throw new JsonParseException("Error on parse Sell from Json", ex);
         }
     }
 
-    public Sell(){}
+    public Sell() {
+    }
 
     public Long getId() {
         return id;

@@ -3,11 +3,16 @@ package stadium.service;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stadium.builder.ClientBuilders;
 import stadium.dto.ResponseDTO;
 import stadium.model.*;
 import stadium.service.beans.*;
 
 import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ControllerService {
@@ -54,6 +59,25 @@ public class ControllerService {
         if(temp==null)
             throw new NotFoundException("Client with given id not found");
         dto.setData(temp.getMap());
+        return dto;
+    }
+
+    public ResponseDTO getSellsByClientId(Long id) throws Exception{
+        ResponseDTO dto = ResponseDTO.allIsOk();
+        Client temp = clientService.getById(id);
+        if(temp==null)
+            throw new NotFoundException("Client with given id not found");
+        List<Map<String, Object>> sellList = new ArrayList<>();
+        Map<String, Object> data = new HashMap<>();
+
+        List<Sell> sells = sellService.getSellsByClientId(id);
+        for (Sell sell:sells) {
+            List<SellEntre> sellEntres = sellEntreService.getSellEntresBySellId(sell.getId());
+            ClientBuilders.appendSellEntres(sell,sellEntres,sellList);
+        }
+        ClientBuilders.setSellsSize(sells,data);
+        data.put("sells", sellList);
+        dto.setData(data);
         return dto;
     }
 

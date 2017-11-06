@@ -14,7 +14,7 @@ public class GenericServiceImpl<T extends Functions> implements GenericService<T
     private Class<T> type;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     public void setType(Class<T> c){
         this.type=c;
@@ -23,6 +23,7 @@ public class GenericServiceImpl<T extends Functions> implements GenericService<T
     public T getById(Long id) throws Exception {
         return entityManager.find(type, id);
     }
+
 
     public Long save(T object) throws ConstraintViolationException {
         entityManager.persist(object);

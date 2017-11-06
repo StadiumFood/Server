@@ -17,13 +17,13 @@ public class SellEntre  implements Functions{
     private Long id;
 
     @Column(name = "sellId")
-    private Integer sellId;
+    private Long sellId;
 
     @Column(name = "productId")
-    private Integer productId;
+    private Long productId;
 
     @Column(name = "storageId")
-    private Integer storageId;
+    private Long storageId;
 
     @Column(name = "productPrice")
     private Double productPrice;
@@ -55,13 +55,6 @@ public class SellEntre  implements Functions{
 
     public SellEntre(){}
 
-    public SellEntre(Integer sellId, Integer productId, Integer storageId, Double productPrice, Integer quantity) {
-        this.sellId = sellId;
-        this.productId = productId;
-        this.storageId = storageId;
-        this.productPrice = productPrice;
-        this.quantity = quantity;
-    }
 
     public Long getId() {
         return id;
@@ -71,27 +64,27 @@ public class SellEntre  implements Functions{
         this.id = id;
     }
 
-    public Integer getSellId() {
+    public Long getSellId() {
         return sellId;
     }
 
-    public void setSellId(Integer sellId) {
+    public void setSellId(Long sellId) {
         this.sellId = sellId;
     }
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
-    public Integer getStorageId() {
+    public Long getStorageId() {
         return storageId;
     }
 
-    public void setStorageId(Integer storageId) {
+    public void setStorageId(Long storageId) {
         this.storageId = storageId;
     }
 
