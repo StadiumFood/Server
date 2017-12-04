@@ -142,4 +142,35 @@ public class Client implements Functions {
         isValidated = validated;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Client client = (Client) o;
+
+        if (id != null ? !id.equals(client.id) : client.id != null) return false;
+        if (name != null ? !name.equals(client.name) : client.name != null) return false;
+        if (surName != null ? !surName.equals(client.surName) : client.surName != null) return false;
+        if (oldName != null ? !oldName.equals(client.oldName) : client.oldName != null) return false;
+        if (email != null ? !email.equals(client.email) : client.email != null) return false;
+        if (regDate != null ? !regDate.equals(client.regDate) : client.regDate != null) return false;
+        if (remDate != null ? !remDate.equals(client.remDate) : client.remDate != null) return false;
+        if (password != null ? !password.equals(client.password) : client.password != null) return false;
+        return isValidated != null ? isValidated.equals(client.isValidated) : client.isValidated == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surName != null ? surName.hashCode() : 0);
+        result = 31 * result + (oldName != null ? oldName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (regDate != null ? regDate.hashCode() : 0);
+        result = 31 * result + (remDate != null ? remDate.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (isValidated != null ? isValidated.hashCode() : 0);
+        return result;
+    }
 }

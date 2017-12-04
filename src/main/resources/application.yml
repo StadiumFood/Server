@@ -1,0 +1,12 @@
+server:
+  port: 5000
+  address: localhost
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/testBase
+    username: testUser
+    password: testPassword
+    driver-class-name: com.mysql.jdbc.Driver

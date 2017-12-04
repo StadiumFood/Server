@@ -1,10 +1,13 @@
 package stadium.service;
 
 import org.springframework.stereotype.Repository;
+import stadium.model.Client;
 import stadium.model.Functions;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
@@ -36,7 +39,14 @@ public class GenericServiceImpl<T extends Functions> implements GenericService<T
         entityManager.remove(obj);
     }
 
-    public void patch(T object) throws Exception {
-        //TODO
+    public T patch(T object) throws Exception {
+        return entityManager.merge(object);
+    }
+
+    public long getCount() throws Exception{
+        CriteriaBuilder qb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = qb.createQuery(Long.class);
+        cq.select(qb.count(cq.from(type)));
+        return entityManager.createQuery(cq).getSingleResult();
     }
 }
